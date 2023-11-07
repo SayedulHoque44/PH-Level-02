@@ -9,7 +9,7 @@
       public species: string,
       public sound: string
     ) {
-      // constructor e parameter properties/modifier use krle tkn ebabei krlei hy, compiler call and intialize sob kore dey
+      //Typescript: constructor e parameter properties/modifier use krle tkn ebabei krlei hy, compiler call and intialize sob kore dey
       // Initilizing
       //   this.name = name;
       //   this.species = species;
