@@ -6,7 +6,7 @@
   type AreaString2 = {
     [key in keyof { height: "s"; width: "r" }]: string; // keyof take the key as like - "height" | width""
   };
-  //
+  //Dynamic type
   type DynamicType<T> = {
     [key in keyof T]: T[key]; //
   };
