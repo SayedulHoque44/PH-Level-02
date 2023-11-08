@@ -33,5 +33,9 @@
   interface arr2 {
     [index: number]: number;
   }
+  interface arr3 {
+    [index: number]: number | string;
+  }
   const Arr: arr2 = [12, 34, 35];
+  const Arr3: arr3 = [12, 34, "str", "str"];
 }
