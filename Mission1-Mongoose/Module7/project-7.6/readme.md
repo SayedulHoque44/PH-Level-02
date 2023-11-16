@@ -19,3 +19,6 @@
 - but erpor package.json e scripts e akta scripts e boli dite hbe amra ki cmd likle ki open hbe kiser maddome `"dev":"nodemon ./dist/server.js"` --> mane amra `yarn dev` hit krle nodemon e amder server.js run hbe
 
 - install postman to PC to test api
+- (request + response + express + setup + run) 7.6 & 7.7 end.
+- 7.8 start -->
+-
