@@ -41,26 +41,6 @@ userRouter.get("/get-user", (req, res) => {
         },
     });
 });
-//--------> ulta palta url dile tkn segula catch korar jonno
-app.all("*", (req, res) => {
-    res.status(400).json({
-        status: "Error",
-        message: "Somthing Went Wrong!",
-    });
-});
-// ---------->Error handdling
-app.get("/error", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        res.send(somthing);
-    }
-    catch (err) {
-        next(console_1.error); // error poperty dewar karone ata onno kono handler kacehe na giye golbal error middleware er kache jabe
-        // res.status(404).send({
-        //   status: "Error",
-        //   message: "Faild to get Data",
-        // });
-    }
-}));
 // --------->middleware
 const checkvalidName = (req, res, next) => {
     if (req.query.name === "sayed") {
@@ -85,6 +65,27 @@ app.post("/", (req, res) => {
     console.log(req.body);
     res.send(req.body);
 });
+// ---------->Error handdling
+//ulta palta url dile tkn segula catch korar jonno
+app.all("*", (req, res) => {
+    res.status(400).json({
+        status: "Error",
+        message: "Somthing Went Wrong!",
+    });
+});
+//error send to golbal middleware
+app.get("/error", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        res.send(somthing);
+    }
+    catch (err) {
+        next(console_1.error); // error poperty dewar karone ata onno kono handler kacehe na giye golbal error middleware er kache jabe
+        // res.status(404).send({
+        //   status: "Error",
+        //   message: "Faild to get Data",
+        // });
+    }
+}));
 // global error handler
 app.use((err, req, res, next) => {
     res.status(400).send({
