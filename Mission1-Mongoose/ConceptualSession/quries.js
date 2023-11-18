@@ -137,5 +137,55 @@ db.orders.aggregate([
     }
     
 ])
+//- **4.Calculate the total quantity and average price of products in each order. Display the order ID, total quantity, and average price.
+
+db.orders.aggregate([
+    // stage-1 --> devided the products from orders products array
+    {
+        $unwind: "$products"
+    },
+    // stage-1 --> now they product ara single, and product price are in the products collection so we have to $lookup by this products id
+    {
+        $lookup: {
+               from: "products",
+               localField: "products.product_id",
+               foreignField: "_id",
+               as: "ProductDetails"
+             }
+    },
+    // stage-2 break from the array the ProductDetails
+    {
+        $unwind: "$ProductDetails"
+    },
+    // stage-3 --> now $group orders based on their id and calculate what ever you want 
+    {
+        $group: { 
+            _id: "$_id",
+            totalQuantity:{
+                $sum:"$products.quantity"
+            },
+            totalOrders:{
+                $sum:1
+            },
+            productList:{$push: {
+                name: "$ProductDetails.name",
+                price: "$ProductDetails.price"
+            }},
+            avgPrice:{$avg: "$ProductDetails.price"}
+        }
+    },
+    {
+      $project: {
+          totalQuantity:1,
+          totalOrders:1,
+          avgPrice:{$toInt: "$avgPrice"},
+          productList:1,
+          
+      }  
+    }
+])
+
+
+
 
 */
